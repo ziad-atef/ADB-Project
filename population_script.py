@@ -32,7 +32,7 @@ for index in tqdm(range(Records)):
   StartDate = fake.date()
   EndDate = fake.date()
 
-  DevInsertQuery = "INSERT INTO developer (DEV_User_Name, DEV_ID, DEV_Email, DEV_Hash, DEV_Address, DEV_Job_Title, DEV_Projects_Count, DEV_Age) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+  DevInsertQuery = "INSERT INTO DEVELOPER (DEV_User_Name, DEV_ID, DEV_Email, DEV_Hash, DEV_Address, DEV_Job_Title, DEV_Projects_Count, DEV_Age) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
   DevEntry = (Name, ID, Email, Hash, Address, JobTitle, ProjectCount, Age)
   cursor.execute(DevInsertQuery,DevEntry)
 
