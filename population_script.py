@@ -1,3 +1,5 @@
+#!/bin/env python3
+
 import mysql.connector
 import random
 import sys
@@ -6,7 +8,7 @@ from faker import Faker
 from tqdm import tqdm
 
 fake = Faker()
-Records = 1000000
+Records = 1000
 
 AdvancedDB = mysql.connector.connect(
     host="localhost",
