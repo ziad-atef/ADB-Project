@@ -1,7 +1,7 @@
-CREATE SCHEMA AdvancedDB;
+CREATE SCHEMA ADB;
 
 
-use AdvancedDB;
+use ADB;
 
 create table DEVELOPER
 (
@@ -61,3 +61,24 @@ CREATE TABLE DEVELOPER_WORKS_ON
     Foreign key (DEV_Id) references DEVELOPER(DEV_ID),
     Foreign key (PRO_Id) references PROJECT(PRO_ID)
 );
+
+create table COMPETITION
+(
+    COM_ID int unique not null,
+    COM_Name varchar(50) not null,
+    COM_Status varchar(10),
+    COM_Start_Date date,
+    COM_End_Date date,
+    COM_Description varchar(500),
+    primary key(COM_ID)
+);
+
+CREATE TABLE DEVELOPER_PARTICIPATE
+(
+    DEV_Id int not null,
+    COM_Id int not null,
+    Primary key (DEV_Id, COM_Id),
+    Foreign key (DEV_Id) references DEVELOPER(DEV_Id),
+    Foreign key (COM_Id) references COMPETITION(COM_Id)
+);
+
