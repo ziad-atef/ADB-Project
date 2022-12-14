@@ -81,3 +81,4 @@ CREATE TABLE DEVELOPER_PARTICIPATE
     Foreign key (DEV_Id) references DEVELOPER(DEV_Id),
     Foreign key (COM_Id) references COMPETITION(COM_Id)
 );
+
