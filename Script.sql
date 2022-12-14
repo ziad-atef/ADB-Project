@@ -62,7 +62,7 @@ CREATE TABLE DEVELOPER_WORKS_ON
     Foreign key (PRO_Id) references PROJECT(PRO_ID)
 );
 
-create table COMPETITION
+CREATE TABLE COMPETITION
 (
     COM_ID int unique not null,
     COM_Name varchar(50) not null,
@@ -82,3 +82,31 @@ CREATE TABLE DEVELOPER_PARTICIPATE
     Foreign key (COM_Id) references COMPETITION(COM_Id)
 );
 
+create table CLIENT
+(
+    CLI_ID int unique not null,
+    CLI_Name varchar(50) not null, 
+    CLI_Email varchar(50) unique not null,
+    CLI_Phone varchar(50),
+    CLI_Creation_Date date not null,
+    CLI_Last_Login date not null,
+
+    primary key (CLI_ID)
+);
+
+CREATE TABLE CLI_Field
+(
+    CLI_CAT_Field varchar(50) not null,
+    CAT_Client_Id int not null,
+    Primary key (CLI_CAT_Field, CAT_Client_Id),
+    Foreign key (CAT_Client_Id) references Client(CLI_ID)
+);
+
+CREATE TABLE CLIENT_HIRES
+(
+    CLI_Id int not null,
+    DEV_Id int not null,
+    Primary key (CLI_Id, DEV_Id),
+    Foreign key (CLI_Id) references CLIENT(CLI_ID),
+    Foreign key (DEV_Id) references DEVELOPER(DEV_ID)
+);
