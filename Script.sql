@@ -1,6 +1,5 @@
 CREATE SCHEMA ADB;
 
-
 use ADB;
 
 create table DEVELOPER
@@ -20,18 +19,6 @@ create table DEVELOPER
 
 
 /* Multivalued Attributes*/
-
-CREATE TABLE DEV_WORKING_EXPERINCE
-(
-    DEV_WOR_Developer_Id int not null,
-    DEV_WOR_Title varchar(50) not null,
-    DEV_WOR_Descreption varchar(100),
-    DEV_WOR_Start_Date date not null,
-    DEV_WOR_End_Date date not null,
-    
-    Primary key (DEV_WOR_Developer_Id, DEV_WOR_Title),
-    Foreign key (DEV_WOR_Developer_Id) references DEVELOPER(DEV_ID)
-);
 
 create table PROJECT
 (
@@ -99,7 +86,7 @@ CREATE TABLE CLI_Field
     CLI_CAT_Field varchar(50) not null,
     CAT_Client_Id int not null,
     Primary key (CLI_CAT_Field, CAT_Client_Id),
-    Foreign key (CAT_Client_Id) references Client(CLI_ID)
+    Foreign key (CAT_Client_Id) references CLIENT(CLI_ID)
 );
 
 CREATE TABLE CLIENT_HIRES

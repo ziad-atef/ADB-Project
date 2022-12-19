@@ -1,6 +1,6 @@
-CREATE SCHEMA ADB;
+CREATE SCHEMA ADB_DEOPTIMIZED;
 
-use ADB;
+use ADB_DEOPTIMIZED;
 
 -- deoptimization: merge developer and work experience into one table
 create table DEVELOPER
@@ -17,28 +17,12 @@ create table DEVELOPER
     -- deoptimized attributes
     -- primary and foreign keys will be discarded
 
-    -- this field should uniquely identify a work experience, 
-    -- as well as causing a developer record to be duplicated with multiple work experiences
-    DEV_WOR_ID int not null unique, 
-
-    -- no probable need for this field to be unique, a developer may have multiple jobs with the same title
-    DEV_WOR_Title varchar(50) not null, 
-
-    DEV_WOR_Descreption varchar(100),
-    DEV_WOR_Start_Date date not null,
-    DEV_WOR_End_Date date not null,
-
     /*Derived Attributes*/
     DEV_Projects_Count int default 0 not null,
-    DEV_Age int not null
-
-    -- since the developer's id won't be unique, should the primary key be the work experience id?
-    -- or perhaps no key at all?
-    -- primary key (DEV_WOR_ID)
+    DEV_Age int not null,
+    primary key (DEV_ID)
 );
 
-
-/* Multivalued Attributes*/
 
 -- deoptimization: merge project and project multimedia into one table
 -- deoptimization: add developer id to project table, thus discarding the developer_works_on table
@@ -53,20 +37,24 @@ create table PROJECT
 
     -- deoptimized attributes
 
-    -- using this key to link the project to the developer, 
-    -- will cause a project record to be duplicated with multiple developers
-    -- and will also allow us to drop the developer_works_on table 
-    DEV_Id int not null,
-    Dev_Role varchar(50),
-
     -- this field should uniquely identify a multimedia link,
     -- as well as causing a project record to be duplicated with multiple multimedia links
     PRO_MUL_ID int not null unique,
     PRO_MUL_Link varchar(500) not null,
-    PRO_MUL_Link_Name varchar(50)
+    PRO_MUL_Link_Name varchar(50),
 
     -- again, should the primary key be the multimedia link id? or perhaps no key at all?
-    -- PRIMARY KEY (PRO_MUL_ID)
+    PRIMARY KEY (PRO_ID, PRO_MUL_ID)
+);
+
+CREATE TABLE DEVELOPER_WORKS_ON
+(
+    DEV_Id int not null,
+    PRO_Id int not null,
+    Dev_Role varchar(50),
+    Primary key (DEV_Id, PRO_Id),
+    Foreign key (DEV_Id) references DEVELOPER(DEV_ID),
+    Foreign key (PRO_Id) references PROJECT(PRO_ID)
 );
 
 -- deoptimization: add developer id to competition table, thus discarding the developer_participate table
