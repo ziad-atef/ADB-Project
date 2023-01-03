@@ -1,0 +1,3 @@
+-- USE ADB
+
+ALTER TABLE project MODIFY COLUMN PRO_Name varchar(100);

@@ -3,8 +3,9 @@ import random
 from sqlalchemy import create_engine
 import pandas as pd
 from tqdm import tqdm
+from faker import Faker
 
-my_conn = create_engine('mysql://root:lol234123@localhost:3306/ADB_1_000_000')
+my_conn = create_engine('mysql://root:[INSERT_PW_HERE]@localhost:3306/ADB_1_000_000_new')
 
 Records = 1_000_000
 BATCH_SIZE = 1000
@@ -12,6 +13,8 @@ BATCH_SIZE = 1000
 batches = Records // BATCH_SIZE
 
 ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non venenatis nulla. Aenean auctor diam tellus, id vehicula sapien egestas vitae. Suspendisse scelerisque orci faucibus ultrices tempor. Nunc semper in orci id volutpat. Nullam consequat tempus lectus, a ullamcorper lectus semper eu. Suspendisse a massa nisl. Quisque non feugiat ipsum. Etiam est ex, interdum pretium ipsum vel, pharetra vulputate eros. Pellentesque interdum sit amet tellus ac iaculis. Sed quis velit viverra, rhoncus ante et, feugiat lacus. Suspendisse blandit molestie laoreet. Aliquam a nulla quam. Maecenas quis accumsan augue. Phasellus rutrum posuere odio, at pretium lorem ultricies volutpat. Donec vehicula congue scelerisque. Maecenas dictum mauris suscipit arcu imperdiet, et lobortis turpis molestie. Nulla vel risus dapibus, efficitur eros eget, aliquet lorem. Nullam quis magna aliquet, sagittis nibh non, gravida."
+
+fake = Faker(use_weighting=False)
 
 ProjectID = 0
 CompetitionID = 0
@@ -37,7 +40,7 @@ for i in tqdm(range(batches)):
         Hash = "1E2D3C4B5A6"
         Address = "Where the money at Avenue"
         JobTitle = "Professional Kak Maker"
-        ProjectCount = 0
+        ProjectCount = random.randint(0, 20)
         Age = 68
 
         #Work
@@ -50,8 +53,8 @@ for i in tqdm(range(batches)):
         devs.append(DevEntry)
 
         #Projects
-        for k in range(0, 3):
-            ProjectName = "Project Kak"
+        for k in range(ProjectCount):
+            ProjectName = fake.name()
             ProjectDesc = "SCREAM FOR ME"
             ProjectRate = 4
 
@@ -72,12 +75,15 @@ for i in tqdm(range(batches)):
                 multimedia.append(MULEntry)
 
             ProjectID += 1
-        
+
+        DevEntry = (Name, ID, Email, Hash, Address, JobTitle, ProjectCount, Age)
+        devs.append(DevEntry)
+
         #Competitions
         for k in range(0, 3):
-            CompetitionName = "Farmer's Competition"
+            CompetitionName = fake.name()
             CompetitionStatus = "Ongoing"
-            CompetitionStartDate = "2018-9-23"
+            CompetitionStartDate = fake.date()
             CompetitionEndDate = "2023-7-23"
             CompetitionDescription = "A competition for farmers to show off their KAK skills! Who's the best slave?"
 
@@ -102,7 +108,7 @@ for i in tqdm(range(batches)):
 
         #Client Fields
         for k in range(0, 3):
-            Field = "Software"
+            Field = fake.name()
 
             FieldEntry = (Field, ID)
             cli_fields.append(FieldEntry)

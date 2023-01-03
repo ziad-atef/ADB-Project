@@ -6,10 +6,11 @@ SET @@profiling_history_size = 100;
 SET @@profiling = 1;
 
 SELECT DEV_User_Name, DEV_Email, PRO_MUL_Link
-FROM DEVELOPER
-JOIN DEVELOPER_WORKS_ON ON DEVELOPER.DEV_ID = DEVELOPER_WORKS_ON.DEV_Id
-JOIN PRO_MULTIMEDIA ON DEVELOPER_WORKS_ON.PRO_Id = PRO_MULTIMEDIA.PRO_MUL_ID
-WHERE PRO_Name = 'Project 1';
+FROM developer
+JOIN developer_works_on ON developer.DEV_ID = developer_works_on.DEV_Id
+JOIN pro_multimedia ON developer_works_on.PRO_Id = pro_multimedia.PRO_MUL_ID
+JOIN project ON pro_multimedia.PRO_MUL_ID = project.PRO_ID
+WHERE PRO_Name = 'Mr. Kevin Stone';
 
 show profiles;
 
@@ -23,11 +24,12 @@ SET @@profiling_history_size = 100;
 SET @@profiling = 1;
 
 SELECT DEV_User_Name, DEV_Email, PRO_MUL_Link
-FROM DEVELOPER
-JOIN DEVELOPER_WORKS_ON ON DEVELOPER.DEV_ID = DEVELOPER_WORKS_ON.DEV_Id
-JOIN PRO_MULTIMEDIA ON DEVELOPER_WORKS_ON.PRO_Id = PRO_MULTIMEDIA.PRO_MUL_ID
-WHERE PRO_Name = 'Project 1';
+FROM developer
+JOIN developer_works_on ON developer.DEV_ID = developer_works_on.DEV_Id
+JOIN pro_multimedia ON developer_works_on.PRO_Id = pro_multimedia.PRO_MUL_ID
+JOIN project ON pro_multimedia.PRO_MUL_ID = project.PRO_ID
+WHERE PRO_Name = 'Mr. Kevin Stone';
 
 show profiles;
 
-drop index index_project_count on developer
+drop index index_project_name on project

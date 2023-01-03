@@ -18,8 +18,7 @@ show profiles;
 
 -- After Optimization --
 
--- SET GLOBAL innodb_buffer_pool_size = 134217728; 
--- SET GLOBAL innodb_buffer_pool_size = 268435456;
+SET GLOBAL innodb_buffer_pool_size = 268435456;
 
 SET @@profiling = 0;
 SET @@profiling_history_size = 0;
@@ -36,3 +35,5 @@ JOIN pro_multimedia ON project.PRO_ID = pro_multimedia.PRO_MUL_ID
 WHERE COM_Start_Date BETWEEN '2019-01-01' AND '2019-12-31';
 
 show profiles;
+
+SET GLOBAL innodb_buffer_pool_size = 134217728; 

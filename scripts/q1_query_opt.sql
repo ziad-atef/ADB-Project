@@ -15,7 +15,7 @@ WHERE DEV_ID IN
     (
         SELECT CAT_Client_Id
         FROM cli_field
-        WHERE CLI_CAT_Field = 'Software Development'
+        WHERE CLI_CAT_Field = 'Katie Schmidt'
     )
 );
 
@@ -28,9 +28,10 @@ SET @@profiling_history_size = 0;
 SET @@profiling_history_size = 100; 
 SET @@profiling = 1;
 
-SELECT DEV_User_Name, DEV_Email
-FROM developer as dev, client_hires as ch, cli_field as cf
-WHERE dev.DEV_ID = ch.DEV_Id and cf.CLI_CAT_Field = 'Software Development';
+select DEV_User_Name, DEV_Email
+from developer
+join client_hires on developer.DEV_ID = client_hires.DEV_Id
+join cli_field on client_hires.CLI_Id = cli_field.CAT_Client_Id
+where CLI_CAT_Field = 'Katie Schmidt';
 
 show profiles;
-
