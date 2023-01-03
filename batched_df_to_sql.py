@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 from tqdm import tqdm
 
-my_conn = create_engine('mysql://root:data6OO6suck5@localhost:3306/adb')
+my_conn = create_engine('mysql://root:lol234123@localhost:3306/ADB_1_000_000')
 
 Records = 1_000_000
 BATCH_SIZE = 1000
@@ -130,12 +130,12 @@ for i in tqdm(range(batches)):
     df_cli_hires = pd.DataFrame(cli_hires, columns=['CLI_Id', 'DEV_Id'])
 
     # write the dataframes to mysql 
-    df_devs.to_sql('developer', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_projects.to_sql('project', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_works_on.to_sql('developer_works_on', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_multimedia.to_sql('pro_multimedia', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_competitions.to_sql('competition', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_dev_participate.to_sql('developer_participate', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_clients.to_sql('client', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_cli_fields.to_sql('cli_field', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_cli_hires.to_sql('client_hires', con=my_conn, if_exists='append', index=False, method= 'multi')
+    df_devs.to_sql('developer', con=my_conn, if_exists='append', index=False)
+    df_projects.to_sql('project', con=my_conn, if_exists='append', index=False)
+    df_works_on.to_sql('developer_works_on', con=my_conn, if_exists='append', index=False)
+    df_multimedia.to_sql('pro_multimedia', con=my_conn, if_exists='append', index=False)
+    df_competitions.to_sql('competition', con=my_conn, if_exists='append', index=False)
+    df_dev_participate.to_sql('developer_participate', con=my_conn, if_exists='append', index=False)
+    df_clients.to_sql('client', con=my_conn, if_exists='append', index=False)
+    df_cli_fields.to_sql('cli_field', con=my_conn, if_exists='append', index=False)
+    df_cli_hires.to_sql('client_hires', con=my_conn, if_exists='append', index=False)
