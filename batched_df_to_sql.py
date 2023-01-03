@@ -4,9 +4,9 @@ from sqlalchemy import create_engine
 import pandas as pd
 from tqdm import tqdm
 
-my_conn = create_engine('mysql://root:data6OO6suck5@localhost:3306/adb')
+my_conn = create_engine('mysql://root:admin@localhost:3306/ADB_100K')
 
-Records = 1_000_000
+Records = 1_000_00
 BATCH_SIZE = 1000
 
 batches = Records // BATCH_SIZE
@@ -37,7 +37,7 @@ for i in tqdm(range(batches)):
         Hash = "1E2D3C4B5A6"
         Address = "Where the money at Avenue"
         JobTitle = "Professional Kak Maker"
-        ProjectCount = 0
+        ProjectCount = random.randint(0, 6)
         Age = 68
 
         #Work
@@ -50,7 +50,7 @@ for i in tqdm(range(batches)):
         devs.append(DevEntry)
 
         #Projects
-        for k in range(0, 3):
+        for k in range(ProjectCount):
             ProjectName = "Project Kak"
             ProjectDesc = "SCREAM FOR ME"
             ProjectRate = 4
@@ -72,7 +72,10 @@ for i in tqdm(range(batches)):
                 multimedia.append(MULEntry)
 
             ProjectID += 1
-        
+
+        DevEntry = (Name, ID, Email, Hash, Address, JobTitle, ProjectCount, Age)
+        devs.append(DevEntry)
+
         #Competitions
         for k in range(0, 3):
             CompetitionName = "Farmer's Competition"
@@ -130,12 +133,12 @@ for i in tqdm(range(batches)):
     df_cli_hires = pd.DataFrame(cli_hires, columns=['CLI_Id', 'DEV_Id'])
 
     # write the dataframes to mysql 
-    df_devs.to_sql('developer', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_projects.to_sql('project', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_works_on.to_sql('developer_works_on', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_multimedia.to_sql('pro_multimedia', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_competitions.to_sql('competition', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_dev_participate.to_sql('developer_participate', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_clients.to_sql('client', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_cli_fields.to_sql('cli_field', con=my_conn, if_exists='append', index=False, method= 'multi')
-    df_cli_hires.to_sql('client_hires', con=my_conn, if_exists='append', index=False, method= 'multi')
+    df_devs.to_sql('developer', con=my_conn, if_exists='append', index=False)
+    df_projects.to_sql('project', con=my_conn, if_exists='append', index=False)
+    df_works_on.to_sql('developer_works_on', con=my_conn, if_exists='append', index=False)
+    df_multimedia.to_sql('pro_multimedia', con=my_conn, if_exists='append', index=False)
+    df_competitions.to_sql('competition', con=my_conn, if_exists='append', index=False)
+    df_dev_participate.to_sql('developer_participate', con=my_conn, if_exists='append', index=False)
+    df_clients.to_sql('client', con=my_conn, if_exists='append', index=False)
+    df_cli_fields.to_sql('cli_field', con=my_conn, if_exists='append', index=False)
+    df_cli_hires.to_sql('client_hires', con=my_conn, if_exists='append', index=False)
