@@ -5,9 +5,9 @@ import pandas as pd
 from tqdm import tqdm
 from faker import Faker
 
-my_conn = create_engine('mysql://root:[INSERT_PW_HERE]@localhost:3306/ADB_1_000_000_new')
+my_conn = create_engine('mysql://root:@localhost:3306/ADB_1_000_00_test')
 
-Records = 1_000_000
+Records = 1_000_00
 BATCH_SIZE = 1000
 
 batches = Records // BATCH_SIZE
